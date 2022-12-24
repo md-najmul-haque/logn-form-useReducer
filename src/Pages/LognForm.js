@@ -14,12 +14,23 @@ const LongForm = () => {
 
     }
 
-    const reducer = () => { }
+    const reducer = (state, action) => {
+        switch (action.type) {
+            case "INPUT":
+                return { ...state, [action.payload.name]: action.payload.value }
+
+            case "TOGGLE":
+                return { ...state, terms: !state.terms }
+            default:
+                return state;
+        }
+    }
 
     const [state, dispatch] = useReducer(reducer, initialState)
 
     const submit = (event) => {
         event.preventDefault();
+        console.log(state)
 
     };
 
@@ -38,6 +49,7 @@ const LongForm = () => {
                         type='text'
                         name='firstName'
                         id='firstName'
+                        onClick={(e) => dispatch({ type: "INPUT", payload: { name: e.target.name, value: e.target.value } })}
                     />
                 </div>
                 <div className='flex flex-col w-full max-w-xs'>
@@ -48,6 +60,7 @@ const LongForm = () => {
                         type='text'
                         name='lastName'
                         id='lastName'
+                        onClick={(e) => dispatch({ type: "INPUT", payload: { name: e.target.name, value: e.target.value } })}
                     />
                 </div>
                 <div className='flex flex-col w-full max-w-xs'>
@@ -58,6 +71,7 @@ const LongForm = () => {
                         type='email'
                         name='email'
                         id='email'
+                        onClick={(e) => dispatch({ type: "INPUT", payload: { name: e.target.name, value: e.target.value } })}
                     />
                 </div>
                 <div className='flex flex-col w-full max-w-xs'>
@@ -69,6 +83,7 @@ const LongForm = () => {
                                 id='male'
                                 name='gender'
                                 value='male'
+                                onClick={(e) => dispatch({ type: "INPUT", payload: { name: e.target.name, value: e.target.value } })}
                             />
                             <label className='ml-2 text-lg' for='male'>
                                 Male
@@ -91,6 +106,7 @@ const LongForm = () => {
                                 id='other'
                                 name='gender'
                                 value='other'
+                                onClick={(e) => dispatch({ type: "INPUT", payload: { name: e.target.name, value: e.target.value } })}
                             />
                             <label className='ml-2 text-lg' for='other'>
                                 Other
@@ -105,6 +121,7 @@ const LongForm = () => {
                     <select
                         name='education'
                         id='education'
+                        onSelect={(e) => dispatch({ type: "INPUT", payload: { name: e.target.name, value: e.target.value } })}
                     >
                         <option value='SSC'>SSC</option>
                         <option value='HSC'>HSC</option>
@@ -135,6 +152,7 @@ const LongForm = () => {
                         id='feedback'
                         cols='30'
                         rows='4'
+                        onBlur={(e) => dispatch({ type: "INPUT", payload: { name: e.target.name, value: e.target.value } })}
                     ></textarea>
                 </div>
 
@@ -145,6 +163,7 @@ const LongForm = () => {
                             type='checkbox'
                             name='term'
                             id='terms'
+                            onClick={() => dispatch({ type: "TOGGLE" })}
                         />
                         <label for='terms'>I agree to terms and conditions</label>
                     </div>
