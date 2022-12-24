@@ -1,7 +1,22 @@
-import React from "react";
-
+import React, { useReducer } from "react";
 
 const LongForm = () => {
+
+    const initialState = {
+        firstName: "",
+        lastName: "",
+        email: "",
+        gender: "",
+        education: "",
+        quantity: 0,
+        feedback: "",
+        terms: false,
+
+    }
+
+    const reducer = () => { }
+
+    const [state, dispatch] = useReducer(reducer, initialState)
 
     const submit = (event) => {
         event.preventDefault();
@@ -10,6 +25,7 @@ const LongForm = () => {
 
     return (
         <div className='h-screen w-screen flex justify-center items-center overflow-auto'>
+
             <form
                 className='shadow-lg p-10 rounded-md flex flex-wrap gap-3 max-w-3xl justify-between'
                 onSubmit={submit}
@@ -141,6 +157,7 @@ const LongForm = () => {
                 </div>
             </form>
         </div>
+
     );
 };
 
